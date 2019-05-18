@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<h1>Titulo</h1>
+<div id="app">
+    <p>{{msg}}</p>
+    <ul>
+        <li v-for="item in lista">
+            {{item.nombre}}
+            <span v-if="item.q>0" style="margin-left:5px">
+                {{item.q}}
+            </span>
+            <span v-if="item.q==0">
+                Sin stock
+            </span>
+
+            <span style="margin-left: 10px"
+                v-on:click="item.q++"
+            >+</span>
+        </li>
+    </ul>
+
+
+
+    <p>Nueva Fruta</p>
+    <div style="display: flex">
+        <div>
+            Nombre
+            <input type="text"
+                   v-model="nuevaFruta.nombre"
+                   v-on:keyup.enter="agregarFruta"
+            />
+        </div>
+        <div>
+            Cantidad
+            <input type="text"
+                   v-model="nuevaFruta.q"
+                   v-on:keyup.enter="agregarFruta"
+            />
+        </div>
+    </div>
+
+    <button
+            v-on:click="agregarFruta"
+    >Agregar Fruta
+    </button>
+
+
+    <h4>Total : {{sumarFrutas}}</h4>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
