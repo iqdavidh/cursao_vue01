@@ -1,4 +1,4 @@
-const app = new Vue({
+const app01 = new Vue({
     el: '#app',
     data: {
         msg: 'yea_baby',
