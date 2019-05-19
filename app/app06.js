@@ -1,35 +1,53 @@
 Vue.component(
-    'saludo',
+    'hijo',
     {
         template: `
-<div>
-    <h4>{{title}}</h4>
-    <p>{{msg}}</p>
-</div>
-`,
+        <div class="pd-5 bg-success">
+            <h4>hijo</h4>
+            <p>Número: {{numero}}</p>  
+            <p>Nombre: {{nombre}}</p>          
+        </div>
+        `,
         data() {
             return {
-                title:'supertitulo',
-                msg: 'saludo  2'
-            };
+                nombre: 'x'
+            }
+        },
+        props: [
+            'numero'
+        ],
+        mounted() {
+
+            this.$emit('nombre')
         }
     }
 );
 
 Vue.component(
-    'contador',
+    'padre',
     {
-        template:`
-        <button @click="pasos++">+ {{pasos}}</button>
-        `,
-        data(){
+        template: `
+<div class="p-5 bg-dark text-white">
+    <h3>
+        Componente padre  
+        <span 
+        class="badge badge-info" 
+        @click="numeroPadre++"
+        title="Número padre"
+            > {{numeroPadre}}
+        </span>         
+    </h3>
+    <p> </p>
+    <hijo :numero="numeroPadre"></hijo>
+</div>
+`,
+        data() {
             return {
-                pasos:0
-            }
+                numeroPadre: 0
+            };
         }
     }
 );
-
 
 
 const app = new Vue({
