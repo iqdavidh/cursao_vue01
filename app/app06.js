@@ -5,20 +5,16 @@ Vue.component(
         <div class="pd-5 bg-success">
             <h4>hijo</h4>
             <p>Número: {{numero}}</p>  
-            <p>Nombre: {{nombre}}</p>          
+            <button @click="increment">+</button>       
+            <button @click="disminuir">-</button>       
+            <button @click="agregar(3)">+3</button>       
         </div>
         `,
-        data() {
-            return {
-                nombre: 'x'
-            }
+        computed:{
+            ...Vuex.mapState(['numero'])
         },
-        props: [
-            'numero'
-        ],
-        mounted() {
-
-            this.$emit('nombre')
+        methods:{
+            ...Vuex.mapMutations(['increment','disminuir','agregar'])
         }
     }
 );
@@ -32,31 +28,30 @@ Vue.component(
         Componente padre  
         <span 
         class="badge badge-info" 
-        @click="numeroPadre++"
+        @click=""
         title="Número padre"
-            > {{numeroPadre}}
+            > {{numero}}
         </span>         
     </h3>
-    <p> </p>
-    <hijo :numero="numeroPadre"></hijo>
+    
+    <hijo></hijo>
 </div>
 `,
-        data() {
-            return {
-                numeroPadre: 0
-            };
+        computed:{
+            ...Vuex.mapState(['numero'])
         }
+
     }
 );
 
 
 const app = new Vue({
     el: '#app',
-    data: {
-        msg: 'yead'
-    },
+    store: store,
     methods: {},
-    computed: {},
+    computed: {
+
+    },
     mounted() {
         console.log('mounted');
     }
@@ -75,7 +70,7 @@ function getTokenFecha() {
     m = fecha.getMinutes();
     codeFecha += ":" + (m < 10 ? "0" : "") + m.toString();
     let code = "/* Build_" + codeFecha + "*/";
-    return "\n\n" + "console.log('" + code + "');";
+    return code;
 }
 
 console.log(getTokenFecha());
