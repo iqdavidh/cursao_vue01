@@ -28,10 +28,16 @@
 <body>
 
 
-<h1>componente pade</h1>
+
 <div id="app" class="container mt-5">
 
-    <padre></padre>
+    <p>Cursos</p>
+    <ol>
+        <li v-for="item in cursos">
+            {{item}}
+        </li>
+    </ol>
+
 
 
 </div>
